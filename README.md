@@ -53,3 +53,5 @@ When ssh'ing between VM's if you get this error:
 [root@vm01 ~]# ssh root@vm02
 Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 The error message means that none of the authentication methods managed to authenticate your session, and there is no mention of a password option so password authentication has probably been disabled. To fix edit /etc/ssh/sshd_config and check that you have PasswordAuthentication yes and it's not commented out (#), then restart sshd if required: service sshd restart (it won't disconnect any sesssions coz it's clever).
+
+sshpass -p "$REPLICA_SSH_PASS" ssh -o StrictHostKeyChecking=no $REPLICA_SSH_USER@$REPLICA_IP
